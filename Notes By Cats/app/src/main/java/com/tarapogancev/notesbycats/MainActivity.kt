@@ -1,37 +1,81 @@
 package com.tarapogancev.notesbycats
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
+import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.tarapogancev.notesbycats.adapter.NoteListAdapter
+import com.tarapogancev.notesbycats.database.RoomDB
 import com.tarapogancev.notesbycats.databinding.ActivityMainBinding
+import com.tarapogancev.notesbycats.model.Note
+import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var noteListAdapter:NoteListAdapter
+    private var notes: List<Note> = ArrayList<Note>()
+    private lateinit var database: RoomDB
+    private lateinit var floatingActionButton: FloatingActionButton
+
+    private val noteClickListener = object : NoteClickListener {
+        override fun onClick(note: Note): Void {
+            TODO("Not yet implemented")
+        }
+
+        override fun onLongClick(note: Note, cardView: CardView): Void {
+            TODO("Not yet implemented")
+        }
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        recyclerView = findViewById(R.id.recycler_home)
+        floatingActionButton = findViewById(R.id.fab_add)
 
-        setSupportActionBar(binding.toolbar)
+        database = RoomDB.getInstance(this)
+        notes = database.mainDAO().getAll()
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        updateRecycler(notes)
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+        floatingActionButton.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(p0: View?) {
+                val intent: Intent = Intent(this@MainActivity, NotesTakerActivity::class.java)
+                startActivityForResult(intent, 101)
+
+            }
+        })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 101) {
+            if (resultCode == Activity.RESULT_OK) {
+                var newNote: Note = data?.getSerializableExtra("note") as Note
+                database.mainDAO().insert(newNote)
+                notes = (database.mainDAO().getAll())
+                noteListAdapter.notifyDataSetChanged()
+                updateRecycler(notes)
+
+            }
         }
+    }
+
+    private fun updateRecycler(notes: List<Note>) {
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
+        noteListAdapter = NoteListAdapter(this@MainActivity, notes, noteClickListener)
+        recyclerView.adapter = noteListAdapter
     }
 
 }

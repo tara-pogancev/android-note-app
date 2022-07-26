@@ -8,9 +8,9 @@ import java.util.*
 @Entity(tableName = "notes")
 class Note (
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val title: String = "",
-    val text: String = "",
-    val timestamp: String = "",
-    val pinned: Boolean = false,
+    var title: String = "",
+    var text: String = "",
+    var timestamp: String = "",
+    var pinned: Boolean = false,
     ) : Serializable {
 }
