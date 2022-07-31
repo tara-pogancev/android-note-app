@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import com.tarapogancev.notesbycats.model.Note
 import java.text.SimpleDateFormat
 import java.util.*
@@ -27,6 +28,7 @@ class NotesTakerActivity : AppCompatActivity() {
         imageView_save = findViewById(R.id.imageView_save)
         editText_text = findViewById(R.id.editText_text)
         editText_title = findViewById(R.id.editText_title)
+
 
         var isOldNote: Boolean = false
         var note: Note =  Note()

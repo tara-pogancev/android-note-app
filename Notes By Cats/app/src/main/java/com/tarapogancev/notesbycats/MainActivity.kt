@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener  {
     private lateinit var database: RoomDB
     private lateinit var floatingActionButton: FloatingActionButton
     private var selectedNote: Note = Note()
+    private lateinit var imageView_menu: ImageView
 
     private val noteClickListener = object : NoteClickListener {
         override fun onClick(note: Note) {
@@ -40,9 +42,7 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener  {
         override fun onLongClick(note: Note, cardView: CardView) {
             selectedNote = note
             showPopup(cardView)
-
         }
-
     }
 
     private fun showPopup(cardView: CardView) {
@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener  {
         floatingActionButton = findViewById(R.id.fab_add)
         searchView_home = findViewById(R.id.searchView_home)
         searchView_home.setBackgroundResource(R.drawable.bg_white_rounded)
+        imageView_menu = findViewById(R.id.imageView_menu)
 
         database = RoomDB.getInstance(this)
         notes = database.mainDAO().getAll()
@@ -84,6 +85,16 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener  {
                 filter(p0)
                 return true
             }
+        })
+
+        imageView_menu.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(p0: View?) {
+                var popupMenu: PopupMenu = PopupMenu(this@MainActivity, imageView_menu)
+                popupMenu.setOnMenuItemClickListener(this@MainActivity)
+                popupMenu.inflate(R.menu.main_menu)
+                popupMenu.show()
+            }
+
         })
 
     }
@@ -151,6 +162,16 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener  {
                     notes = (database.mainDAO().getAll())
                     updateRecycler(notes)
                     Toast.makeText(this@MainActivity, "Note deleted.", Toast.LENGTH_SHORT).show()
+                    return true
+                }
+
+                R.id.menu_settings -> {
+                    Toast.makeText(this@MainActivity, "Settings not implemented yet.", Toast.LENGTH_SHORT).show()
+                    return true
+                }
+
+                R.id.menu_developer_info -> {
+                    Toast.makeText(this@MainActivity, "Developer info not implemented yet.", Toast.LENGTH_SHORT).show()
                     return true
                 }
 
