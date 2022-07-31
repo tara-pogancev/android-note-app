@@ -147,7 +147,10 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener  {
                 }
 
                 R.id.delete -> {
-
+                    database.mainDAO().delete(selectedNote)
+                    notes = (database.mainDAO().getAll())
+                    updateRecycler(notes)
+                    Toast.makeText(this@MainActivity, "Note deleted.", Toast.LENGTH_SHORT).show()
                     return true
                 }
 

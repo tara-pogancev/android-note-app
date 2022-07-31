@@ -13,7 +13,7 @@ interface MainDAO {
     @Insert(onConflict = REPLACE)
     fun insert(note: Note): Void
 
-    @Query("SELECT * FROM notes ORDER BY id DESC")
+    @Query("SELECT * FROM notes ORDER BY pinned DESC, id DESC")
     fun getAll(): List<Note>
 
     @Query("UPDATE notes SET title= :title, text= :text WHERE id = :id")
