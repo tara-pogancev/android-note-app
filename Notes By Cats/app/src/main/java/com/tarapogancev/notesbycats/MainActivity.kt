@@ -3,8 +3,12 @@ package com.tarapogancev.notesbycats
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.PopupMenu
+import androidx.appcompat.widget.SearchView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,24 +20,37 @@ import com.tarapogancev.notesbycats.databinding.ActivityMainBinding
 import com.tarapogancev.notesbycats.model.Note
 import java.util.ArrayList
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener  {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var recyclerView: RecyclerView
+    private lateinit var searchView_home: SearchView
     private lateinit var noteListAdapter:NoteListAdapter
     private var notes: List<Note> = ArrayList<Note>()
     private lateinit var database: RoomDB
     private lateinit var floatingActionButton: FloatingActionButton
+    private var selectedNote: Note = Note()
 
     private val noteClickListener = object : NoteClickListener {
-        override fun onClick(note: Note): Void {
-            TODO("Not yet implemented")
+        override fun onClick(note: Note) {
+            var intent: Intent = Intent(this@MainActivity, NotesTakerActivity::class.java)
+            intent.putExtra("old_note", note)
+            startActivityForResult(intent, 102)
         }
 
-        override fun onLongClick(note: Note, cardView: CardView): Void {
-            TODO("Not yet implemented")
+        override fun onLongClick(note: Note, cardView: CardView) {
+            selectedNote = note
+            showPopup(cardView)
+
         }
 
+    }
+
+    private fun showPopup(cardView: CardView) {
+        var popupMenu: PopupMenu = PopupMenu(this, cardView)
+        popupMenu.setOnMenuItemClickListener(this@MainActivity)
+        popupMenu.inflate(R.menu.popup_menu)
+        popupMenu.show()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +59,7 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recycler_home)
         floatingActionButton = findViewById(R.id.fab_add)
+        searchView_home = findViewById(R.id.searchView_home)
 
         database = RoomDB.getInstance(this)
         notes = database.mainDAO().getAll()
@@ -55,6 +73,31 @@ class MainActivity : AppCompatActivity() {
 
             }
         })
+
+        searchView_home.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                filter(p0)
+                return true
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                filter(p0)
+                return true
+            }
+        })
+
+    }
+
+    private fun filter(p0: String?) {
+        var filteredList: ArrayList<Note> = ArrayList()
+        for (singleNote: Note in notes) {
+            if (p0 != null) {
+                if (singleNote.title.lowercase().contains(p0.lowercase()) || singleNote.text.lowercase().contains(p0.lowercase())) {
+                    filteredList.add(singleNote)
+                }
+            }
+        }
+        updateRecycler(filteredList)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -66,7 +109,14 @@ class MainActivity : AppCompatActivity() {
                 notes = (database.mainDAO().getAll())
                 noteListAdapter.notifyDataSetChanged()
                 updateRecycler(notes)
-
+            }
+        } else if (requestCode == 102) {
+            if (resultCode == Activity.RESULT_OK) {
+                var newNote: Note = data?.getSerializableExtra("note") as Note
+                database.mainDAO().update(newNote.id, newNote.title, newNote.text)
+                notes = (database.mainDAO().getAll())
+                noteListAdapter.notifyDataSetChanged()
+                updateRecycler(notes)
             }
         }
     }
@@ -78,4 +128,33 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = noteListAdapter
     }
 
+    override fun onMenuItemClick(item: MenuItem?): Boolean {
+        if (item != null) {
+            when (item.itemId) {
+                R.id.pin -> {
+                    selectedNote.pinned =  !selectedNote.pinned
+                    database.mainDAO().updatePinned(selectedNote.id, selectedNote.pinned)
+                    if (selectedNote.pinned) {
+                        Toast.makeText(this@MainActivity, "Note pinned!", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this@MainActivity, "Note unpinned!", Toast.LENGTH_SHORT).show()
+                    }
+
+                    notes = (database.mainDAO().getAll())
+                    updateRecycler(notes)
+
+                    return true
+                }
+
+                R.id.delete -> {
+
+                    return true
+                }
+
+            }
+        }
+
+        return true
+    }
 }
+

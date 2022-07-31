@@ -28,6 +28,17 @@ class NotesTakerActivity : AppCompatActivity() {
         editText_text = findViewById(R.id.editText_text)
         editText_title = findViewById(R.id.editText_title)
 
+        var isOldNote: Boolean = false
+        var note: Note =  Note()
+        try {
+            note = intent.getSerializableExtra("old_note") as Note
+            editText_text.setText(note.text)
+            editText_title.setText(note.title)
+            isOldNote = true
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
         imageView_save.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
                 var title: String = editText_title.text.toString()
@@ -40,10 +51,12 @@ class NotesTakerActivity : AppCompatActivity() {
                     var formatter: SimpleDateFormat = SimpleDateFormat("EEE, dd/MM/yyyy, HH:mm a")
                     var date: Date = Date()
 
-                    note = Note()
+                    if (!isOldNote) {
+                        note = Note()
+                    }
                     note.title = title
                     note.text = text
-                    note.timestamp = formatter.format(date)
+                    note.timestamp = "Edited: " + formatter.format(date)
 
                     val intent: Intent = Intent()
                     intent.putExtra("note", note)

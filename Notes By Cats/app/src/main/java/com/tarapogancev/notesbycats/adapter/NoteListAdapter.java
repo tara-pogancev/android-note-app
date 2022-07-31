@@ -74,6 +74,7 @@ public class NoteListAdapter extends RecyclerView.Adapter<NotesViewHolder> {
     public int getItemCount() {
         return list.size();
     }
+
 }
 
 class NotesViewHolder extends RecyclerView.ViewHolder {
@@ -91,7 +92,5 @@ class NotesViewHolder extends RecyclerView.ViewHolder {
         textView_note = itemView.findViewById(R.id.textView_note);
         textView_date = itemView.findViewById(R.id.textView_date);
         imageView_pin = itemView.findViewById(R.id.imageView_pin);
-
-
     }
 }

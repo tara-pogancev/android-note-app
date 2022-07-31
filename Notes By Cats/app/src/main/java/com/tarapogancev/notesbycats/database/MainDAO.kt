@@ -22,5 +22,7 @@ interface MainDAO {
     @Delete
     fun delete(note: Note): Void
 
+    @Query("UPDATE notes SET pinned= :pinned WHERE id = :id")
+    fun updatePinned(id: Int, pinned: Boolean): Void
 
 }
