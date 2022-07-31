@@ -22,7 +22,6 @@ import java.util.ArrayList
 
 class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener  {
 
-    private lateinit var binding: ActivityMainBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchView_home: SearchView
     private lateinit var noteListAdapter:NoteListAdapter
@@ -60,6 +59,7 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener  {
         recyclerView = findViewById(R.id.recycler_home)
         floatingActionButton = findViewById(R.id.fab_add)
         searchView_home = findViewById(R.id.searchView_home)
+        searchView_home.setBackgroundResource(R.drawable.bg_white_rounded)
 
         database = RoomDB.getInstance(this)
         notes = database.mainDAO().getAll()
