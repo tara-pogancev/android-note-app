@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener  {
         } else if (requestCode == 102) {
             if (resultCode == Activity.RESULT_OK) {
                 var newNote: Note = data?.getSerializableExtra("note") as Note
-                database.mainDAO().update(newNote.id, newNote.title, newNote.text)
+                database.mainDAO().update(newNote.id, newNote.title, newNote.text, newNote.timestamp)
                 notes = (database.mainDAO().getAll())
                 noteListAdapter.notifyDataSetChanged()
                 updateRecycler(notes)
@@ -171,7 +171,8 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener  {
                 }
 
                 R.id.menu_developer_info -> {
-                    Toast.makeText(this@MainActivity, "Developer info not implemented yet.", Toast.LENGTH_SHORT).show()
+                    val intent: Intent = Intent(this@MainActivity, AboutDeveloper::class.java)
+                    startActivityForResult(intent, 103)
                     return true
                 }
 

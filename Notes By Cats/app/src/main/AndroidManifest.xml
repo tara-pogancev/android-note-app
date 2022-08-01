@@ -14,9 +14,12 @@
         android:theme="@style/Theme.NotesByCats.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".NotesTakerActivity"
-            android:theme="@style/Theme.NotesByCats.NoActionBar"
+            android:name=".AboutDeveloper"
             android:exported="false" />
+        <activity
+            android:name=".NotesTakerActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NotesByCats.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

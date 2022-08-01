@@ -16,8 +16,8 @@ interface MainDAO {
     @Query("SELECT * FROM notes ORDER BY pinned DESC, id DESC")
     fun getAll(): List<Note>
 
-    @Query("UPDATE notes SET title= :title, text= :text WHERE id = :id")
-    fun update(id: Int, title: String, text: String): Void
+    @Query("UPDATE notes SET title= :title, text= :text, timestamp= :timestamp WHERE id = :id")
+    fun update(id: Int, title: String, text: String, timestamp: String): Void
 
     @Delete
     fun delete(note: Note): Void

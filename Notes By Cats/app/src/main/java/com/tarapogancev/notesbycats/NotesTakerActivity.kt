@@ -50,7 +50,7 @@ class NotesTakerActivity : AppCompatActivity() {
                     Toast.makeText(this@NotesTakerActivity, "Please enter note title.", Toast.LENGTH_SHORT)
                     return
                 } else {
-                    var formatter: SimpleDateFormat = SimpleDateFormat("EEE, dd/MM/yyyy, HH:mm a")
+                    var formatter: SimpleDateFormat = SimpleDateFormat("EEE, dd/MM/yy")
                     var date: Date = Date()
 
                     if (!isOldNote) {
