@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Dark Theme">
+        <CheckBoxPreference
+            android:title="Enable Dark Theme"
+            android:key="DarkTheme"
+            android:defaultValue="false"
+            android:summaryOn="Dark theme is activated."
+            android:summaryOff="Dark theme is not activated."/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Delete all data">
+        <Preference
+            android:title="Delete all my notes"
+            android:summary="Deletes all your data. This cannot be undone."
+            ></Preference>
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

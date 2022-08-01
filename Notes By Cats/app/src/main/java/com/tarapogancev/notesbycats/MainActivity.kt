@@ -166,13 +166,14 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener  {
                 }
 
                 R.id.menu_settings -> {
-                    Toast.makeText(this@MainActivity, "Settings not implemented yet.", Toast.LENGTH_SHORT).show()
+                    val intent: Intent = Intent(this@MainActivity, Settings::class.java)
+                    startActivity(intent)
                     return true
                 }
 
                 R.id.menu_developer_info -> {
                     val intent: Intent = Intent(this@MainActivity, AboutDeveloper::class.java)
-                    startActivityForResult(intent, 103)
+                    startActivity(intent)
                     return true
                 }
 

@@ -6,14 +6,14 @@
     android:background="@color/dark_purple"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AboutDeveloper"
-    android:paddingTop="40dp"
-    android:paddingStart="20dp"
-    android:paddingEnd="20dp">
+    tools:context=".AboutDeveloper">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="40dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         >
 
         <TextView
@@ -99,7 +99,7 @@
             android:layout_below="@+id/cardView_title"
             android:layout_marginTop="20dp"
             app:cardCornerRadius="15dp"
-            app:cardBackgroundColor="#4A5167"
+            app:cardBackgroundColor="@color/darkest_purple"
             >
 
             <RelativeLayout
@@ -125,7 +125,7 @@
                     android:layout_below="@+id/text_reachMe"
                     android:layout_marginStart="10dp"
                     android:text="tarapogancev@gmail.com"
-                    android:textColor="#BAC3ED"
+                    android:textColor="@color/light_purple"
                     android:textSize="18dp"
                     android:textStyle="bold"
                     />

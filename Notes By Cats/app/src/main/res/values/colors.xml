@@ -11,6 +11,8 @@
 
     <color name="main_purple">#A3AEDF</color>
     <color name="dark_purple">#6C748E</color>
+    <color name="darkest_purple">#4A5167</color>
+    <color name="light_purple">#BAC3ED</color>
     <color name="background_gray">#F3F4F8</color>
     <color name="soft_green">#74A57F</color>
     <color name="accent_green">#84C318</color>
