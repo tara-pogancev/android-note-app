@@ -68,8 +68,12 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener  {
         recyclerView = findViewById(R.id.recycler_home)
         floatingActionButton = findViewById(R.id.fab_add)
         searchView_home = findViewById(R.id.searchView_home)
-        searchView_home.setBackgroundResource(R.drawable.bg_white_rounded)
         imageView_menu = findViewById(R.id.imageView_menu)
+        if (darkMode) {
+            searchView_home.setBackgroundResource(R.drawable.bg_black_rounded)
+        } else {
+            searchView_home.setBackgroundResource(R.drawable.bg_white_rounded)
+        }
 
         database = RoomDB.getInstance(this)
         notes = database.mainDAO().getAll()
@@ -80,7 +84,6 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener  {
             override fun onClick(p0: View?) {
                 val intent: Intent = Intent(this@MainActivity, NotesTakerActivity::class.java)
                 startActivityForResult(intent, 101)
-
             }
         })
 

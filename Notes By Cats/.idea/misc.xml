@@ -16,10 +16,15 @@
         <entry key="..\:/FTN/android-note-application/Notes By Cats/app/src/main/res/menu/menu_main.xml" value="0.5" />
         <entry key="..\:/FTN/android-note-application/Notes By Cats/app/src/main/res/menu/popup_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/FTN/android-note-application/Notes By Cats/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.212" />
+        <entry key="..\:/FTN/android-note-application/Notes by Cats/app/src/main/res/drawable/bg_black_rounded.xml" value="0.259" />
+        <entry key="..\:/FTN/android-note-application/Notes by Cats/app/src/main/res/drawable/bg_white_rounded.xml" value="0.26" />
         <entry key="..\:/FTN/android-note-application/Notes by Cats/app/src/main/res/layout/activity_about_developer.xml" value="0.36666666666666664" />
-        <entry key="..\:/FTN/android-note-application/Notes by Cats/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/FTN/android-note-application/Notes by Cats/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/FTN/android-note-application/Notes by Cats/app/src/main/res/layout/activity_notes_taker.xml" value="0.1" />
         <entry key="..\:/FTN/android-note-application/Notes by Cats/app/src/main/res/layout/activity_settings.xml" value="0.36666666666666664" />
+        <entry key="..\:/FTN/android-note-application/Notes by Cats/app/src/main/res/layout/note_card.xml" value="0.2546875" />
+        <entry key="..\:/FTN/android-note-application/Notes by Cats/app/src/main/res/menu/main_menu.xml" value="0.27447916666666666" />
+        <entry key="..\:/FTN/android-note-application/Notes by Cats/app/src/main/res/menu/popup_menu.xml" value="0.2546875" />
         <entry key="..\:/FTN/android-note-application/Notes by Cats/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.212" />
         <entry key="..\:/FTN/android-note-application/Notes by Cats/app/src/main/res/xml/prefs.xml" value="0.2546875" />
       </map>
