@@ -11,14 +11,4 @@
             android:summaryOff="Dark theme is not activated."/>
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:title="Delete all data">
-        <Preference
-            android:title="Delete all my notes"
-            android:summary="Deletes all your data. This cannot be undone."
-            ></Preference>
-
-    </PreferenceCategory>
-
-
 </PreferenceScreen>
