@@ -12,6 +12,7 @@ import android.preference.PreferenceManager
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 
 class Settings : PreferenceActivity() {
 
@@ -22,23 +23,21 @@ class Settings : PreferenceActivity() {
     }
 
     fun loadSettings() {
-        var sharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        var darkMode: Boolean = sharedPreferences.getBoolean("DarkTheme", false)
-        if (darkMode) {
-            setTheme(R.style.Theme_NotesByCatsDark)
+        var checkBox_nigth: CheckBoxPreference = findPreference("DarkTheme") as CheckBoxPreference
+        if (checkBox_nigth.isChecked) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
-            setTheme(R.style.Theme_NotesByCats)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
 
-        var checkBox_nigth: CheckBoxPreference = findPreference("DarkTheme") as CheckBoxPreference
         checkBox_nigth.setOnPreferenceChangeListener(object: Preference.OnPreferenceChangeListener {
             override fun onPreferenceChange(p0: Preference?, p1: Any?): Boolean {
 
                 var darkMode: Boolean = p1 as Boolean
                 if (darkMode) {
-                    setTheme(R.style.Theme_NotesByCatsDark)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 } else {
-                    setTheme(R.style.Theme_NotesByCats)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 }
 
                 recreate()

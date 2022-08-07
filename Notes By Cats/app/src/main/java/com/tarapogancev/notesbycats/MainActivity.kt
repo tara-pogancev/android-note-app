@@ -2,12 +2,15 @@ package com.tarapogancev.notesbycats
 
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.SearchView
 import androidx.cardview.widget.CardView
@@ -17,9 +20,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.tarapogancev.notesbycats.adapter.NoteListAdapter
 import com.tarapogancev.notesbycats.database.RoomDB
-import com.tarapogancev.notesbycats.databinding.ActivityMainBinding
 import com.tarapogancev.notesbycats.model.Note
-import java.util.ArrayList
 
 class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener  {
 
@@ -53,6 +54,14 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener  {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        var sharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        var darkMode: Boolean = sharedPreferences.getBoolean("DarkTheme", false)
+        if (darkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
