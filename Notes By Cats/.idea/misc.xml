@@ -27,6 +27,8 @@
         <entry key="..\:/FTN/android-note-application/Notes by Cats/app/src/main/res/menu/popup_menu.xml" value="0.2546875" />
         <entry key="..\:/FTN/android-note-application/Notes by Cats/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.212" />
         <entry key="..\:/FTN/android-note-application/Notes by Cats/app/src/main/res/xml/prefs.xml" value="0.2546875" />
+        <entry key="app/src/main/res/layout/activity_about_developer.xml" value="0.24947916666666667" />
+        <entry key="app/src/main/res/layout/activity_notes_taker.xml" value="0.24947916666666667" />
       </map>
     </option>
   </component>

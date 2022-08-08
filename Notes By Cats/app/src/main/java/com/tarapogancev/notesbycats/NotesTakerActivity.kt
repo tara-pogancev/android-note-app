@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
@@ -24,11 +25,12 @@ class NotesTakerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notes_taker)
+        setSupportActionBar(findViewById(R.id.toolbar_notes))
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         imageView_save = findViewById(R.id.imageView_save)
         editText_text = findViewById(R.id.editText_text)
         editText_title = findViewById(R.id.editText_title)
-
 
         var isOldNote: Boolean = false
         var note: Note =  Note()
@@ -67,5 +69,9 @@ class NotesTakerActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return super.onOptionsItemSelected(item)
     }
 }
